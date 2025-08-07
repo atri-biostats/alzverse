@@ -1,0 +1,15 @@
+template:
+  package: tidytemplate
+  bootstrap: 5
+
+url: https://atri-biostats.github.io/alzverse/
+
+development:
+  mode: auto
+
+home:
+  links:
+  - text: ADNIMERGE2 data
+    href: https://adni.loni.usc.edu/
+  - text: A4LEARN data
+    href: https://www.a4studydata.org

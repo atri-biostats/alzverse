@@ -1,0 +1,64 @@
+Package: alzverse
+Title: Alzheimer’s Data Package Ecosystem
+Version: 0.0.1
+Authors@R: c(
+    person("Michael", "Donohue", , "mdonohue@usc.ed", role = c("aut", "cre")),
+    person("Kedir", "Hussen", , "hussen@usc.edu", role = c("aut")),
+    person("Oliver", "Langford", , "olangfor@usc.edu", role = c("aut"))
+  )
+Description: A meta-package for accessing and analyzing Alzheimer's disease 
+    datasets through A4LEARN, ADNIMERGE2, and other tools. Learn more about the
+    'alzverse' at <https://atri-biostats.github.io/alzverse>.
+URL: https://atri-biostats.github.io/alzverse,
+    https://github.com/atri-biostats/alzverse,
+    https://adni.loni.usc.edu/,
+    https://www.a4studydata.org,
+    https://atri-biostats.github.io/ADNIMERGE2,
+    https://github.com/atri-biostats/ADNIMERGE2,
+    https://atri-biostats.github.io/A4LEARN,
+    https://github.com/atri-biostats/A4LEARN
+BugReports: https://github.com/atri-biostats/alzverse/issues
+License: MIT + file LICENSE
+LazyData: true
+LazyDataCompression: bzip2
+Imports: 
+    stringr, 
+    rlang,
+    dplyr,
+    tibble,
+    assertr,
+    magrittr,
+    rmarkdown,
+    tidyselect,
+    purrr,
+    tidyr, 
+    cli
+Suggests:
+    knitr,
+    tidyverse,
+    DT,
+    metacore,
+    metatools,
+    admiral,
+    admiraldev,
+    xportr,
+    labelled,
+    measurements, 
+    gtsummary,
+    testthat, 
+    htmltools, 
+    sdtm.oak, 
+    sdtmchecks,
+    ggplot2,
+    see, 
+    lme4, 
+    marginaleffects, 
+    performance,
+    survival,
+    msm,
+    consort
+Depends: 
+    R (>= 3.5)
+VignetteBuilder: knitr
+Encoding: UTF-8
+RoxygenNote: 7.3.2
