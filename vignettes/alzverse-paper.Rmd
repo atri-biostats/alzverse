@@ -1,5 +1,5 @@
 ---
-title: "Enhancing Access to Alzheimer's Clinical Research Data via R Packages: the Alzverse"
+title: "Alzheimer's Clinical Research Data via R Packages: the Alzverse"
 output:
   rmarkdown::html_vignette:
     keep_md: TRUE
@@ -28,7 +28,7 @@ affiliations:
 date: 7 August 2025
 bibliography: references.bib
 vignette: >
-  %\VignetteIndexEntry{Welcome to the Alzverse}
+  %\VignetteIndexEntry{Alzheimer's Clinical Research Data via R Packages: the Alzverse}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
