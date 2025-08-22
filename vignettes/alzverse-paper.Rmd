@@ -151,7 +151,8 @@ ggplot(ADADAS, aes(x = TIME, y = AVAL, group = USUBJID, color = DX)) +
     y = "ADAS-cog13 Total Score",
     x = "Years since baseline visit",
     color = "Baseline Diagnostics Status") +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom") +
+  guides(colour = guide_legend(override.aes = list(alpha = 1)))
 ```
 
 ### A4LEARN
