@@ -1,13 +1,13 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# alzverse <a href="https://atri-biostats.github.io/A4LEARN/"><img src="man/figures/logo.png" align="right" height="138" /></a>
+# alzverse <a href="https://atri-biostats.github.io/alzverse/"><img src="man/figures/logo.png" align="right" height="138" /></a>
 
 ## Overview
 
 The `alzverse` is an ecosystem of R packages containing data for
 Alzheimer’s research. Documentation can be found at
-<https://atri-biostats.github.io/A4LEARN/>.
+<https://atri-biostats.github.io/alzverse/>.
 
 ## Data Availability
 
@@ -41,5 +41,3 @@ To install `alzverse`:
 ``` r
 remotes::install_github("atri-biostats/alzverse")
 ```
-
-## References
