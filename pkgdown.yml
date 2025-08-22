@@ -3,7 +3,7 @@ pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   alzverse-paper: alzverse-paper.html
-last_built: 2025-08-22T23:26Z
+last_built: 2025-08-22T23:28Z
 urls:
   reference: https://atri-biostats.github.io/alzverse/reference
   article: https://atri-biostats.github.io/alzverse/articles
