@@ -1,0 +1,45 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# alzverse <a href="https://atri-biostats.github.io/A4LEARN/"><img src="man/figures/logo.png" align="right" height="138" /></a>
+
+## Overview
+
+The `alzverse` is an ecosystem of R packages containing data for
+Alzheimer’s research. Documentation can be found at
+<https://atri-biostats.github.io/A4LEARN/>.
+
+## Data Availability
+
+Data is available from:
+
+- `A4LEARN`: [A4StudyData.org](A4StudyData.org)
+- `ADNIMERGE2`: [loni.usc.edu](loni.usc.edu)
+
+Data documentation is available from
+
+- `A4LEARN`:
+  [atri-biostats.github.io/A4LEARN/](https://atri-biostats.github.io/A4LEARN)
+- `ADNIMERGE2`:
+  [atri-biostats.github.io/ADNIMERGE2](https://github.com/atri-biostats/ADNIMERGE2)
+
+## Code Availability
+
+R code is available for download from the following repositories:
+
+- alzverse:
+  [github.com/atri-biostats/alzverse](https://github.com/atri-biostats/alzverse)
+- A4LEARN:
+  [github.com/atri-biostats/A4LEARN](https://github.com/atri-biostats/A4LEARN)
+- ADNIMERGE2:
+  [github.com/atri-biostats/ADNIMERGE2](https://github.com/atri-biostats/ADNIMERGE2)
+
+## Installation
+
+To install `alzverse`:
+
+``` r
+remotes::install_github("atri-biostats/alzverse")
+```
+
+## References
