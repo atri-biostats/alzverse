@@ -7,7 +7,7 @@ tags:
 - open data
 - R
 - Alzheimer's
-author: Michael C. Donohue, Kedir Hussen, Oliver Langford, Richard Armenta, Gustavo Jimenez-Maggiora
+author: Michael C. Donohue, Kedir Hussen, Oliver Langford, Richard Gallardo, Gustavo Jimenez-Maggiora
 authors:
 - name: Michael C. Donohue
   orcid: 0000-0001-6026-2238
@@ -17,7 +17,7 @@ authors:
 - name: Oliver Langford
   orcid: 0009-0006-8951-1326	
   affiliation: 1
-- name: Richard Armenta
+- name: Richard Gallardo
   affiliation: 1
 - name: Gustavo Jimenez-Maggiora
   orcid: 0000-0001-9745-5121
