@@ -77,7 +77,7 @@ The `pkgdown` `R` package [@pkgdown] makes it trivial to export documentation an
 
 ### Standardized and Efficient Workflow and Testing
 
-Questions often arise about the original source of data or how derived variables were defined. Therefore, it is crucial to preserve a record of data progeny. The standardize `R` package structure and build workflow makes it easy to retrace the steps of the package build. `R` packages also have a standardize framework for testing [@testthat] and tools for "assertive" programming to verify assumptions about the data [@assertr]. 
+Questions often arise about the original source of data or how derived variables were defined. Therefore, it is crucial to preserve a record of data progeny [THIS IS ESPECIALLY CRITICAL IN REGULATED ENVIRONMENTS]. The standardized `R` package structure and build workflow makes it easy to retrace the steps of the package build. `R` packages also have a standardized framework for testing [@testthat] and tools for "assertive" programming to verify assumptions about the data [@assertr]. 
 
 The R package structure and workflow has been well-documented [@wickham2023r]. We briefly review the structure while highlighting some key aspects in the context of the clinical research data.
 
@@ -225,13 +225,13 @@ ggplot(aes(x = TIME, y = AVAL, color = STUDYID)) +
 
 ## Discussion
 
-The development of `A4LEARN` and `ADNIMERGE2` represents a step forward in enabling the Alzheimer's disease research community to share and analyze data more effectively, and serve as a template for additional future study packages. These packages facilitate the transition from proprietary software like SAS to open-source tools, allowing greater flexibility and transparency in the research process. The shift from SAS to `R` represents a broader trend in the clinical research community toward open-source and reproducible research practices.
+The development of `A4LEARN` and `ADNIMERGE2` represents a step forward in enabling the Alzheimer's disease research community to share and analyze data more effectively, and serve as a template for additional future study packages. These packages facilitate the transition from proprietary software like SAS to open-source tools, allowing greater flexibility and transparency in the research process. The shift from SAS to `R` represents a broader trend in the clinical research community toward open-source and reproducible research practices. [THE INTEGRATION OF R PACKAGES SUCH AS PHARMAVERSE, WHICH ARE APPROPRIATE FOR REGULATED USE CASES, FURTHER ENSURES THAT THESE BENEFITS ARE AVAILABLE TO THE BROADEST SET OF INVESTIGATORS, REGARDLESS OF AFFILIATION.]
 
-Challenges remain, particularly in the area of data access. In our examples data packages can be sourced using the existing data access models. This puts the onus on data users to go to different sites to obtain data. Once retrieved, The use of locally installed packages poses potential risks, which can be mitigated by using containerization and package management tools like Docker and renv for version control.
+Challenges remain, particularly in the area of data access. In our examples data packages can be sourced using the existing data access models. This puts the onus on data users to go to different sites to obtain data. Once retrieved, The use of locally installed packages poses potential risks, which can be mitigated by using containerization and package management tools like Docker and renv for version control. [COULD WE ENVISION A FUTURE MODEL WHERE AN INVESTIGATOR CAN SUBMIT THEIR DUA AND GET AN ACCESS KEY VIA THE R PACKAGE?]
 
 ## Methods
 
-The primary data sources for the packages are derived from the Alzheimer's Disease Neuroimaging Initiative (ADNI) the A4 and LEARN companions studies. These datasets include longitudinal clinical and neuroimaging data, cognitive test scores, genetic and biomarker data, and other modalities that have been harmonized to facilitate cross-study comparisons.
+The primary data sources for the packages are derived from the Alzheimer's Disease Neuroimaging Initiative (ADNI) and the A4 and LEARN companion studies [CITE: 10.14283/jpad.2024.120]. These datasets include longitudinal clinical and neuroimaging data, cognitive test scores, genetic and biomarker data, and other modalities that have been harmonized to facilitate cross-study comparisons.
 
 To ensure usability and consistency, we curated the datasets by mapping variables to standardized terminologies (e.g., CDISC ADaM, SDTM), handling missing data through imputation techniques, and deriving key analysis variables.
 
@@ -241,7 +241,7 @@ To ensure usability and consistency, we curated the datasets by mapping variable
 * Data Standardization: The packages support standardization of clinical data, with built-in functions to harmonize variable formats, handle missing values, and generate standardized metadata.
 * Reproducibility: Built-in vignettes and examples guide users through the installation, data loading, and analysis processes. The packages integrate with tools like `renv` and Docker to facilitate reproducibility in different computing environments.
 
-The `R` package framework facilitates the creation of Analysis Data Model (ADaM) datasets, which are the gold standard for statistical analysis in clinical trials. The admiral package is used to generate ADaM datasets for ADNIMERGE2. Other pharmaverse tools can be used to create regulatory-compliant tables, listings, and figures.
+The `R` package framework facilitates the creation of Analysis Data Model (ADaM) datasets, which are the gold standard for statistical analysis in clinical trials. The admiral package [CITE?] is used to generate ADaM datasets for ADNIMERGE2. Other pharmaverse tools can be used to create regulatory-compliant tables, listings, and figures.
 
 ## Data Availability
 
