@@ -34,7 +34,7 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
-library(ADNIMERGE2)
+library(alzverse)
 library(tidyverse)
 library(gtsummary)
 library(labelled)
@@ -97,14 +97,10 @@ The R package structure and workflow has been well-documented [@wickham2023r]. W
 
 The ADNIMERGE2 package was built using pharmaverse tools. It can be downloaded from [loni.usc.edu](loni.usc.edu). Below are examples of some basic summaries of participant characteristics by phase, or wave, of ADNI can be created using the derived ADSL data table in the package.
 
-```{r adni-labels, echo=FALSE}
-var_label(ADSL$BMI) <- paste0("Baseline ", get_variable_labels(ADSL)$BMI)
-```
-
 ```{r adni-overall-summary}
 tbl_summary(
-  data = ADNIMERGE2::ADSL %>%
-    filter(ENRLFL %in% "Y"),
+  data = alzverse::ADSL %>%
+    filter(STUDYID == 'ADNI' & ENRLFL %in% "Y"),
   by = ORIGPROT,
   include = c(AGE, SEX, EDUC, RACE, ETHNIC, BMI, DX, APOE, 
     ADASTT13, CDRSB, MMSCORE),
@@ -131,20 +127,16 @@ tbl_summary(
   bold_labels()
 ```
 
-```{r adni-adas-data-prep}
-# Prepare analysis dataset of ADAS-cog item-13 score
-ADADAS <- ADNIMERGE2::ADQS %>%
+```{r adni-adas-indiv-profile-plot, warning = FALSE, fig.alt = "Individual profile plot", fig.cap = "Figure 1. Spahetti plot of ADAS-cog13 scores in ADNI by baseline clinical diagnosis."}
+# Individual profile (spaghetti) plot
+alzverse::ADQS %>%
   # Enrolled participant
-  filter(ENRLFL %in% "Y") %>%
+  filter(STUDYID == 'ADNI' & ENRLFL %in% "Y") %>%
   # ADAS-cog item-13 total score
   filter(PARAMCD %in% "ADASTT13") %>%
   mutate(TIME = convert_number_days(ADY, unit = 'year')) %>%
-  filter(!if_any(all_of(c("TIME", "DX", "AVAL")), ~ is.na(.x)))
-```
-
-```{r adni-adas-indiv-profile-plot, warning = FALSE, fig.alt = "Individual profile plot", fig.cap = "Figure 1. Spahetti plot of ADAS-cog13 scores in ADNI by baseline clinical diagnosis."}
-# Individual profile (spaghetti) plot
-ggplot(ADADAS, aes(x = TIME, y = AVAL, group = USUBJID, color = DX)) +
+  filter(!if_any(all_of(c("TIME", "DX", "AVAL")), ~ is.na(.x))) %>%
+ggplot(aes(x = TIME, y = AVAL, group = USUBJID, color = DX)) +
   geom_line(alpha = 0.5) +
   scale_color_manual(values = c("#73C186", "#F2B974", "#DF957C", "#999999")) +
   labs(
@@ -159,22 +151,12 @@ ggplot(ADADAS, aes(x = TIME, y = AVAL, group = USUBJID, color = DX)) +
 
 Similarly, A4LEARN data can be easily summarized 
 
-```{r a4learn-labels, echo=FALSE}
-SUBJINFO_labels_tab <- A4LEARN::derived_datadic %>%
-  filter(FILE_NAME == 'SUBJINFO.csv') %>%
-  select(FIELD_NAME, FIELD_DESC) %>%
-  filter(!is.na(FIELD_DESC))
-SUBJINFO_labels <- as.list(SUBJINFO_labels_tab$FIELD_DESC)
-names(SUBJINFO_labels) <- SUBJINFO_labels_tab$FIELD_NAME
-```
-
 ```{r a4learn-overall-summary}
 tbl_summary(
-  data = A4LEARN::SUBJINFO %>% filter(SUBSTUDY != 'SF'),
-  by = SUBSTUDY,
-  label = SUBJINFO_labels,
-  include = c(AGEYR, SEX, EDCCNTU, RACE, ETHNIC, BMIBL, SUBSTUDY, APOEGN, 
-    PACCV6, MMSETSV6, AMYLCENT),
+  data = alzverse::ADSL %>% filter(STUDYID %in% c('A4', 'LEARN')),
+  by = STUDYID,
+  include = c(AGE, SEX, EDUC, RACE, ETHNIC, BMI, STUDYID, APOE, 
+    PACCV6, MMSCORE, AMYLCENT),
   type = all_continuous() ~ "continuous2",
   statistic = list(
     all_continuous() ~ "{mean} ({sd})",
@@ -200,19 +182,10 @@ tbl_summary(
 
 #### Merging A4, LEARN, and ADNI
 
-```{r adni-a4learn-mmse-data-prep}
-ADQS_meta <- ADNIMERGE2::ADQS %>%
-  filter(ENRLFL %in% "Y") %>%
-  bind_rows(A4LEARN::ADQS %>%
-    select(STUDYID = SUBSTUDY, USUBJID = BID, PARAMCD = QSTESTCD, 
-      AVAL = QSSTRESN, ADY = QSDTC_DAYS_T0)) %>%
-  mutate(TIME = convert_number_days(ADY, unit = 'year'))
-```
-
 ```{r adni-a4-learn-indiv-profile-plot, warning = FALSE, fig.alt = "Individual profile plot", fig.cap = "Figure 2. Spahetti plot of MMSE scores in ADNI CN, A4, and LEARN."}
-ADQS_meta %>%
+alzverse::ADQS %>%
   filter(DX == 'CN' | STUDYID %in% c('A4', 'LEARN'), 
-    PARAMCD %in% c('MMSCORE', 'MMSE')) %>%
+    PARAMCD == 'MMSE') %>%
 ggplot(aes(x = TIME, y = AVAL, color = STUDYID)) +
   geom_line(aes(group = USUBJID), alpha = 0.25) +
   labs(

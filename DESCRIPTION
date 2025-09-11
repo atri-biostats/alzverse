@@ -36,7 +36,9 @@ Imports:
     tidyselect,
     purrr,
     tidyr, 
-    cli
+    cli,
+    ADNIMERGE2,
+    A4LEARN,
 Suggests:
     knitr,
     tidyverse,
