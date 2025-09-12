@@ -36,8 +36,34 @@ R code is available for download from the following repositories:
 
 ## Installation
 
-To install `alzverse`:
+To install `alzverse`, first download and install:
+
+- `A4LEARN`: [A4StudyData.org](A4StudyData.org), and
+- `ADNIMERGE2`: [loni.usc.edu](loni.usc.edu)
+
+Then run the following steps to download `alzverse` code, build package
+locally with merged data, and install `alzverse`:
 
 ``` r
-remotes::install_github("atri-biostats/alzverse")
+# Check if `remotes` is loaded ----
+if(!require("remotes", character.only = TRUE)) {
+  install.packages("remotes")
+}
+library(remotes)
+
+# download alzverse tar.gz from github ----
+dl <- remote_download(github_remote('atri-biostats/alzverse'))
+dl.dir <- dirname(dl)
+alzverse_home <- file.path(dl.dir, 'alzverse')
+
+# extract files ----
+untar(dl, exdir = dl.dir)
+file.rename(file.path(dl.dir, untar(dl, list = TRUE)[1]), alzverse_home)
+
+# build merged data ----
+callr::rscript(file.path(alzverse_home, 'data-raw', 'data-prep.R'), 
+  wd = alzverse_home)
+
+# build and install package ----
+install.packages(alzverse_home, repos = NULL, type = 'source')
 ```
