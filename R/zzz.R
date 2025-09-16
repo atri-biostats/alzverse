@@ -10,8 +10,8 @@
     return(invisible())
   }
 
-  conflicts <- alzverse_conflicts()
-  inform_startup(alzverse_conflict_message(conflicts))
+  # conflicts <- alzverse_conflicts()
+  # inform_startup(alzverse_conflict_message(conflicts))
 }
 
 is_attached <- function(x) {

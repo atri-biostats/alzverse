@@ -2,9 +2,13 @@ Package: alzverse
 Title: Alzheimer’s Data Package Ecosystem
 Version: 0.0.1
 Authors@R: c(
-    person("Michael", "Donohue", , "mdonohue@usc.ed", role = c("aut", "cre")),
-    person("Kedir", "Hussen", , "hussen@usc.edu", role = c("aut")),
-    person("Oliver", "Langford", , "olangfor@usc.edu", role = c("aut"))
+    person("Michael", "Donohue", email = 'mdonohue@usc.edu', role = c("aut", "cre"),
+      comment = c(ORCID = "0000-0001-6026-2238")),
+    person("Kedir", "Hussen", role = "aut"),
+    person("Oliver", "Langford", role = "aut",
+      comment = c(ORCID = "0009-0006-8951-1326")),
+    person("Gallardo", "Richard", role = "ctb"),
+    person("Jimenez-Maggiora", "Gustavo", role = "ctb")
   )
 Description: A meta-package for accessing and analyzing Alzheimer's disease 
     datasets through A4LEARN, ADNIMERGE2, and other tools. Learn more about the
@@ -32,7 +36,9 @@ Imports:
     tidyselect,
     purrr,
     tidyr, 
-    cli
+    cli,
+    ADNIMERGE2,
+    A4LEARN,
 Suggests:
     knitr,
     tidyverse,
