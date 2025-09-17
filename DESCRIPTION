@@ -7,7 +7,7 @@ Authors@R: c(
     person("Kedir", "Hussen", role = "aut"),
     person("Oliver", "Langford", role = "aut",
       comment = c(ORCID = "0009-0006-8951-1326")),
-    person("Armenta", "Richard", role = "ctb"),
+    person("Gallardo", "Richard", role = "ctb"),
     person("Jimenez-Maggiora", "Gustavo", role = "ctb")
   )
 Description: A meta-package for accessing and analyzing Alzheimer's disease 
