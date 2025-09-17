@@ -49,11 +49,11 @@ theme_set(theme_bw() +
 
 ## Abstract
 
-Sharing clinical research data is essential for advancing research in Alzheimer's disease (AD) and other therapeutic areas. However, challenges in data accessibility, standardization, documentation, usability, and reproducibility continue to impede this goal. In this article, we highlight the advantages of using `R` packages to overcome these challenges using two examples. The first example `R` package, 'A4LEARN' includes data from a randomized trial (the Anti-Amyloid Treatment in Asymptomatic Alzheimer’s [A4] study) and its companion observational study of biomarker negative individuals (the Longitudinal Evaluation of Amyloid Risk and Neurodegeneration [LEARN] study). The second example is the `ADNIMERGE2` `R` package, which includes data from the Alzheimer’s Disease Neuroimaging Initiative (ADNI). These packages bundle raw and processed data, documentation, and reproducible analyses into a portable, analysis-ready formats. By promoting collaboration, transparency, and reproducibility, `R` data packages can play a vital role in accelerating clinical research.
+Sharing clinical research data is essential for advancing research in Alzheimer's disease (AD) and other therapeutic areas. However, challenges in data accessibility, standardization, documentation, usability, and reproducibility continue to impede this goal. In this article, we highlight the advantages of using `R` packages to overcome these challenges using two examples. The `A4LEARN` `R` package includes data from a randomized trial (the Anti-Amyloid Treatment in Asymptomatic Alzheimer’s [A4] study) and its companion observational study of biomarker negative individuals (the Longitudinal Evaluation of Amyloid Risk and Neurodegeneration [LEARN] study). The `ADNIMERGE2` `R` package includes data from the Alzheimer’s Disease Neuroimaging Initiative (ADNI), a longitudinal observational biomarker and imaging study. These packages collect data, documentation, and reproducible analysis vignettes into a portable bundle that can be installed and browsed within commonly used `R` programming environments. We also introduce the `alzverse` package which leverages a common data standard to combine study-specific data packages to facilitate meta-analyses. By promoting collaboration, transparency, and reproducibility, `R` data packages can play a vital role in accelerating clinical research.
 
 ## Introduction
 
-Alzheimer's disease (AD) is one of the leading neurodegenerative diseases worldwide, with growing evidence supporting its multifactorial etiology. The Alzheimer’s Disease Neuroimaging Initiative (ADNI) [@weiner2025overview] and similar projects have accumulated vast quantities of clinical, neuroimaging, and biomarker data, creating opportunities for scientific advances in the understanding and treatment of AD. ADNI has provided data for more than 6000 scientific papers publications [@weiner2025overview].
+Alzheimer's disease (AD) is one of the leading neurodegenerative diseases worldwide, with growing evidence supporting its multifactorial etiology. The Alzheimer’s Disease Neuroimaging Initiative (ADNI) [@weiner2025overview] and similar projects have accumulated vast quantities of clinical, neuroimaging, and biomarker data, creating opportunities for scientific advances in the understanding and treatment of AD. ADNI has provided data for more than 6000 scientific publications [@weiner2025overview].
 
 Availability of such data is on the rise, due in part to data sharing mandates from funders like the National Institutes of Health. However, it often takes considerable time and effort for researchers to gain sufficient familiarity with the data to produce meaningful analyses. Learning curves can be steep due to inadequate or hard-to-locate documentation and example analysis code.
 
@@ -61,7 +61,7 @@ Open-source software solutions, particularly in the form of `R` packages [@R-bas
 
 We discuss how `R` packages can also facilitate easy access, harmonization, and analysis of larger clinical datasets from AD studies. These packages are built with the goal of providing an audit trail of derived data progeny, supporting reproducible research, and leveraging outstanding `R` tools for unit testing and validation [@testthat], websites [@pkgdown], and regulatory submissions [@pharmaverse2023]. 
 
-In this paper we discuss the advantages of using `R` packages to share large clinical study datasets, and provide two new examples: the `A4LEARN` packages which includes data from a randomized trial (the Anti-Amyloid Treatment in Asymptomatic Alzheimer’s [A4] study) [@sperling2023trial] and its companion observational study of biomarker negative individuals (the Longitudinal Evaluation of Amyloid Risk and Neurodegeneration [LEARN] study) [@sperling2024amyloid]; and the `ADNIMERGE2` package, which includes latest data from the Alzheimer’s Disease Neuroimaging Initiative (ADNI) [@weiner2025overview].
+In this paper we discuss the advantages of using `R` packages to share large clinical study datasets, and provide two new examples: the `A4LEARN` packages which includes data from a randomized trial (the Anti-Amyloid Treatment in Asymptomatic Alzheimer’s [A4] study) [@sperling2023trial] and its companion observational study of biomarker negative individuals (the Longitudinal Evaluation of Amyloid Risk and Neurodegeneration [LEARN] study) [@sperling2024amyloid]; and the `ADNIMERGE2` package, which includes latest data from the Alzheimer’s Disease Neuroimaging Initiative (ADNI) [@weiner2025overview]. We also introduce the [`alzverse`](https://atri-biostats.github.io/alzverse/) meta data package, which demonstrates how `ADNIMERGE2`, `A4LEARN`, and other `R` data packages can be combined to facilitate meta-analyses.
 
 ## Advantages of R Data Packages
 
@@ -71,31 +71,43 @@ The most important advantage of using `R` data packages for sharing clinical res
 
 All `R` packages include a manual that details the functions and datasets in a standardized format. This content is linked to the `R` object's name, is readily accessible to the `R` user (e.g. by typing `?t.test`, or `?cars`) and can be browsed within the IDE. This is a drastic improvement compared to the typical case in which relevant data documentation might be contained in unlinked documents and/or data dictionary spreadsheets. `R` packages also typically provide analysis "vignettes", which demonstrate how functions can be applied to available datasets to produce analysis results as tables or figures. These are also linked and can be browsed within the IDE. Our `A4LEARN` package contains a vignette to exactly reproduce key findings of the published manuscript for the trial [@sperling2023trial]. This code can be used by outside researchers to jump start their own inquiries, and help ensure the data is being used correctly, efficiently, and consistent with the intentions of the study team.  
 
-The `R` package bundle of data, `R` functions, documentation and vignettes is made portable as an efficiently compressed file which can be installed on any machine running `R`. Data files within the package are also efficiently compressed using R's `.RData` file format. These `.RData` files can be read by SPSS, Stata, and SAS [CONFIRM]. Another advantage to `.RData` compared to tabular text files (e.g. `.csv` files), is that they can utilize `R` object classes such as dates and factor variables, eliminating the need to process and annotate data prior to analysis.
+The `R` package bundle of data, `R` functions, documentation and vignettes is made portable as an efficiently compressed file which can be installed on any machine running `R`. Data files within the package are also efficiently compressed using R's `.RData` file format. These `.RData` files can be read by SPSS, Stata, and SAS. Another advantage of `.RData` compared to tabular text files (e.g. `.csv` files), is that they can utilize `R` object classes such as dates and factor variables, eliminating the need to process and annotate data prior to analysis.
 
-The `pkgdown` `R` package [@pkgdown] makes it trivial to export documentation and vignettes as a website, and integrates well with code repositories such as GitHub. These `pkgdown` websites are searchable, and make the documentation and examples available to researchers who do not use `R`. See [atri-biostats.github.io/A4LEARN/](https://atri-biostats.github.io/A4LEARN) and [atri-biostats.github.io/ADNIMERGE2](https://github.com/atri-biostats/ADNIMERGE2) for examples.
+The `pkgdown` `R` package [@pkgdown] makes it trivial to export documentation and vignettes as a website and integrates well with code repositories such as GitHub. These `pkgdown` websites are searchable, and make the documentation and examples available to researchers who do not use `R`. See [atri-biostats.github.io/A4LEARN/](https://atri-biostats.github.io/A4LEARN) and [atri-biostats.github.io/ADNIMERGE2](https://github.com/atri-biostats/ADNIMERGE2) for examples.
 
 ### Standardized and Efficient Workflow and Testing
 
-Questions often arise about the original source of data or how derived variables were defined. Therefore, it is crucial to preserve a record of data progeny. This is true whenever reproducible research is a goal, and particularly for submissions to regulators, such as the FDA. The standardized `R` package structure and build workflow make it easy to retrace the steps of the package build. `R` packages also have a standardized framework for testing [@testthat] and tools for "assertive" programming to verify assumptions about the data [@assertr]. 
+Questions often arise about the original source of data or how derived variables were defined. Therefore, it is crucial to preserve a record of data progeny. This is true whenever reproducible research is a goal, and particularly for submissions to regulators, such as the FDA. The standardized `R` package structure and build workflow makes the data progeny transparent. `R` packages also have a standardized framework for testing [@testthat] and tools for "assertive" programming to verify assumptions about the data [@assertr]. 
 
-The R package structure and workflow has been well-documented [@wickham2023r]. We briefly review the structure while highlighting some key aspects in the context of the clinical research data.
+The R package structure and workflow have been well-documented [@wickham2023r]. We briefly review the structure while highlighting some key aspects in the context of the clinical research data.
 
-**`data-raw`**. The `data-raw` directory is intended to house raw data and code to import and process raw data and store as `.Rdata` files in the `data` directory. Raw data can be preserved in the package with minimal manipulation, or it can be processed attaching meta data (variable labels and units), and ensuring factors and dates are stored as the correct object class. Data dictionary spreadsheets can be parsed to provide content for manual pages [@roxygen2].
+**`data-raw`**. The `data-raw` directory is intended to contain raw data and code to import and process raw data and store as `.Rdata` files in the `data` directory. Raw data can be preserved in the package with minimal manipulation, or it can be processed attaching meta data (variable labels and units), and ensuring factors and dates are stored as the correct object class. Data dictionary spreadsheets can be parsed to provide content for manual pages [@roxygen2].
 
-**`vignettes`**. The `vignettes` directory houses the analysis demonstrations, typically as Rmarkdown (`.Rmd`) files [@rmarkdown]. We prefer to create derived datasets and variables as a vignette, as well, so that derivations are easily accessible to researchers within the IDE. These vignettes can include assertive programming to ensure data conforms to expectations [@assertr]. `ADNIMERGE2` contains vignettes which use [`pharmaverse`](https://pharmaverse.org/) workflows to derive CDISC ADaM datasets.
+**`vignettes`**. The `vignettes` directory contains analysis demonstrations, typically as Rmarkdown (`.Rmd`) files [@rmarkdown]. We prefer to create derived datasets and variables as a vignette, as well, so that derivations are easily accessible to researchers within the IDE. These vignettes can include assertive programming to ensure data conforms to expectations [@assertr]. `ADNIMERGE2` contains vignettes which use [`pharmaverse`](https://pharmaverse.org/) workflows to derive Clinical Data Interchange Standards Consortium (CDISC) Analysis Data Model (ADaM) datasets.
 
-**`R`**. The `R` directory contains `.R` files with code defining `R` functions and manual content [@roxygen2]. This directory can store scoring functions, which might be necessary to derive scores from item-level data from psychometric assessments, for example.
+**`R`**. The `R` directory contains `.R` files with code defining `R` functions and their manual content [@roxygen2]. This directory can store scoring functions, which might be necessary to derive scores from item-level data from psychometric assessments, for example.
 
-**`testthat`**. The `testthat` directory includes automated tests that are checked when the package is built. Sensitive and crucial code that requires replication by independent programmers can be tested here, to ensure they produce equivalent results on the actual data and/or test data.
+**`testthat`**. The `testthat` directory includes automated tests that are checked when the package is built. Sensitive and crucial code that requires replication by independent programmers can be tested here to ensure they produce equivalent results on the actual data and/or test data.
 
-**`reports`**. Report code that is not wanted as a vignette can be stored in a separate directory for general reports. Of note, `rmarkdown` supports "parameterized reports", which can produce different output depending on the supplied parameter(s). Clinical trials like A4 often include several outcomes collected on the same schedule and analyzed with the same approach. Instead of writing identical code for several outcomes, one generic parameterized rmarkdown file can produce all of these reports. Clinical trial outcomes are often aggregated into one long dataset with a row for each subject, time point, and outcome (see `ADQS` in the `A4LEARN` package). The parameterized report can filter this long dataset for the desired outcome and analyze only that outcome. Futhermore, using `R` parallel programming tools (e.g. @multidplyr), these reports can be produced in parallel. In the case of the A4 trial read out, once data from the blinded phase was locked and unblinded it only took about 30 minutes to build the final data package and render all planned analysis reports and summary slide decks.
+**`reports`**. Report code that is not desired as a vignette can be stored in a separate directory for general reports. Of note, `rmarkdown` supports "parameterized reports", which can produce different output depending on the supplied parameter(s). Clinical trials like A4 often include several outcomes collected on the same schedule and analyzed with the same approach. Instead of writing identical code for several outcomes, one generic parameterized rmarkdown file can produce all these reports. Clinical trial outcomes are often aggregated into one long dataset with a row for each subject, time point, and outcome (see `ADQS` in the `A4LEARN` package). The parameterized report can filter this long dataset for the desired outcome and analyze only that outcome. Furthermore, using `R` parallel programming tools (e.g. @multidplyr), these reports can be produced in parallel. In the case of the A4 trial read out, once data from the blinded phase was locked and unblinded it only took about 30 minutes to build the final data package and render all planned analysis reports and summary slide decks. Prior to data lock, code and output were tested and reviewed using pseudo arm codes.
 
 ## Example `R` Data Packages
 
+The primary data sources for the packages are derived from the Alzheimer's Disease Neuroimaging Initiative (ADNI) and the A4 and LEARN companion studies [@jimenez2024maximizing]. These datasets include longitudinal clinical and neuroimaging data, cognitive test scores, genetic and biomarker data, and other modalities that have been harmonized to facilitate cross-study comparisons.
+
+To ensure usability and consistency, we curated the datasets by mapping variables to standardized terminologies (e.g., CDISC ADaM), handling missing data through imputation techniques, and deriving key analysis variables.
+
+`A4LEARN` and `ADNIMERGE2` were developed using best practices in `R` package development, including:
+
+* R Package Architecture: Each package is modular, supporting various stages of data analysis, from raw data processing to the generation of regulatory-compliant datasets.
+* Data Standardization: The packages support standardization of clinical data, with built-in functions to harmonize variable formats, handle missing values, and generate standardized metadata.
+* Reproducibility: Built-in vignettes and examples guide users through the installation, data loading, and analysis processes. The packages integrate with tools like `renv` and Docker to facilitate reproducibility in different computing environments.
+
+The `R` package framework facilitates the creation of ADaM datasets, which are the gold standard for statistical analysis in clinical trials. The `admiral` package [@admiral] is used to generate ADaM datasets for `ADNIMERGE2`. Other `pharmaverse` tools can be used to create regulatory-compliant tables, listings, and figures.
+
 ### ADNIMERGE2
 
-The ADNIMERGE2 package was built using pharmaverse tools. It can be downloaded from [loni.usc.edu](loni.usc.edu). Below are examples of some basic summaries of participant characteristics by phase, or wave, of ADNI can be created using the derived ADSL data table in the package.
+The `ADNIMERGE2` package was built using `pharmaverse` tools. It can be downloaded from [loni.usc.edu](loni.usc.edu). Below are examples of some basic summaries of participant characteristics by phase, or wave, of ADNI can be created using the derived ADSL data table in the package.
 
 ```{r adni-overall-summary}
 tbl_summary(
@@ -127,16 +139,16 @@ tbl_summary(
   bold_labels()
 ```
 
-```{r adni-adas-indiv-profile-plot, warning = FALSE, fig.alt = "Individual profile plot", fig.cap = "Figure 1. Spahetti plot of ADAS-cog13 scores in ADNI by baseline clinical diagnosis."}
+```{r adni-adas-indiv-profile-plot, warning = FALSE, fig.alt = "Individual profile plot", fig.cap = "Figure 1. Spaghetti plot of ADAS-cog13 scores in ADNI by baseline clinical diagnosis."}
 # Individual profile (spaghetti) plot
 alzverse::ADQS %>%
   # Enrolled participant
   filter(STUDYID == 'ADNI' & ENRLFL %in% "Y") %>%
   # ADAS-cog item-13 total score
   filter(PARAMCD %in% "ADASTT13") %>%
-  mutate(TIME = convert_number_days(ADY, unit = 'year')) %>%
-  filter(!if_any(all_of(c("TIME", "DX", "AVAL")), ~ is.na(.x))) %>%
-ggplot(aes(x = TIME, y = AVAL, group = USUBJID, color = DX)) +
+  mutate(Years = convert_number_days(ADY, unit = 'year')) %>%
+  filter(!if_any(all_of(c("Years", "DX", "AVAL")), ~ is.na(.x))) %>%
+ggplot(aes(x = Years, y = AVAL, group = USUBJID, color = DX)) +
   geom_line(alpha = 0.5) +
   scale_color_manual(values = c("#73C186", "#F2B974", "#DF957C", "#999999")) +
   labs(
@@ -155,8 +167,7 @@ Similarly, A4LEARN data can be easily summarized
 tbl_summary(
   data = alzverse::ADSL %>% filter(STUDYID %in% c('A4', 'LEARN')),
   by = STUDYID,
-  include = c(AGE, SEX, EDUC, RACE, ETHNIC, BMI, STUDYID, APOE, 
-    PACCV6, MMSCORE, AMYLCENT),
+  include = c(AGE, SEX, EDUC, RACE, ETHNIC, BMI, STUDYID, APOE, AMYLCENT),
   type = all_continuous() ~ "continuous2",
   statistic = list(
     all_continuous() ~ "{mean} ({sd})",
@@ -182,11 +193,12 @@ tbl_summary(
 
 #### Merging A4, LEARN, and ADNI
 
-```{r adni-a4-learn-indiv-profile-plot, warning = FALSE, fig.alt = "Individual profile plot", fig.cap = "Figure 2. Spahetti plot of MMSE scores in ADNI CN, A4, and LEARN."}
+```{r adni-a4-learn-indiv-profile-plot, warning = FALSE, fig.alt = "Individual profile plot", fig.cap = "Figure 2. Spaghetti plot of MMSE scores in ADNI CN, A4, and LEARN."}
 alzverse::ADQS %>%
   filter(DX == 'CN' | STUDYID %in% c('A4', 'LEARN'), 
     PARAMCD == 'MMSE') %>%
-ggplot(aes(x = TIME, y = AVAL, color = STUDYID)) +
+  mutate(Years = convert_number_days(ADY, unit = 'year')) %>%
+ggplot(aes(x = Years, y = AVAL, color = STUDYID)) +
   geom_line(aes(group = USUBJID), alpha = 0.25) +
   labs(
     y = "MMSE Total Score",
@@ -198,23 +210,9 @@ ggplot(aes(x = TIME, y = AVAL, color = STUDYID)) +
 
 ## Discussion
 
-The development of `A4LEARN` and `ADNIMERGE2` represents a step forward in enabling the Alzheimer's disease research community to share and analyze data more effectively, and serve as a template for additional future study packages. These packages facilitate the transition from proprietary software like SAS to open-source tools, allowing greater flexibility and transparency in the research process. The shift from SAS to `R` represents a broader trend in the clinical research community toward open-source and reproducible research practices, as exemplified by the `pharmaverse` project.
+The development of `A4LEARN` and `ADNIMERGE2` represents a step forward in enabling the Alzheimer's disease research community to share and analyze data more effectively and serve as a template for additional future study packages. These packages facilitate the transition from proprietary software like SAS to open-source tools, allowing greater flexibility and transparency in the research process. The shift from SAS to `R` represents a broader trend in the clinical research community toward open-source and reproducible research practices, as exemplified by the `pharmaverse` project.
 
-Challenges remain, particularly in the area of data access. In our examples data packages can be sourced using the existing data access models. This puts the onus on data users to go to different sites to obtain data. Once retrieved, The use of locally installed packages poses potential risks, which can be mitigated by using containerization and package management tools like Docker and `renv` [@renv] for version control. A streamlined future improvement on this model might entail the use access keys and Application Programming Interfaces (APIs).
-
-## Methods
-
-The primary data sources for the packages are derived from the Alzheimer's Disease Neuroimaging Initiative (ADNI) and the A4 and LEARN companion studies [@jimenez2024maximizing]. These datasets include longitudinal clinical and neuroimaging data, cognitive test scores, genetic and biomarker data, and other modalities that have been harmonized to facilitate cross-study comparisons.
-
-To ensure usability and consistency, we curated the datasets by mapping variables to standardized terminologies (e.g., CDISC ADaM, SDTM), handling missing data through imputation techniques, and deriving key analysis variables.
-
-`A4LEARN` and `ADNIMERGE2` were developed using best practices in `R` package development, including:
-
-* R Package Architecture: Each package is modular, supporting various stages of data analysis, from raw data processing to the generation of regulatory-compliant datasets.
-* Data Standardization: The packages support standardization of clinical data, with built-in functions to harmonize variable formats, handle missing values, and generate standardized metadata.
-* Reproducibility: Built-in vignettes and examples guide users through the installation, data loading, and analysis processes. The packages integrate with tools like `renv` and Docker to facilitate reproducibility in different computing environments.
-
-The `R` package framework facilitates the creation of Analysis Data Model (ADaM) datasets, which are the gold standard for statistical analysis in clinical trials. The admiral package [CITE?] is used to generate ADaM datasets for ADNIMERGE2. Other pharmaverse tools can be used to create regulatory-compliant tables, listings, and figures.
+Challenges remain, particularly in data access. In our examples data packages can be sourced using the existing data access models. This puts the onus on data users to go to different sites to obtain data. Once retrieved, the use of locally installed packages poses potential risks, which can be mitigated by using containerization and package management tools like Docker and `renv` [@renv] for version control. A streamlined future improvement on this model might entail the use access keys and Application Programming Interfaces (APIs) which could be directly source within `R`.
 
 ## Data Availability
 
@@ -223,7 +221,7 @@ Data is available from:
 *	`A4LEARN`: [A4StudyData.org](A4StudyData.org)
 *	`ADNIMERGE2`: [loni.usc.edu](loni.usc.edu)
 
-Data documentation is available from 
+Documentation is available from 
 
 *	`A4LEARN`: [atri-biostats.github.io/A4LEARN/](https://atri-biostats.github.io/A4LEARN)
 *	`ADNIMERGE2`: [atri-biostats.github.io/ADNIMERGE2](https://github.com/atri-biostats/ADNIMERGE2)
@@ -238,11 +236,13 @@ R code is available for download from the following repositories:
 
 ## Author Contributions
 
-
+MCD contributed to conceptualization, software, validation, resources, data curation, writing the original draft, writing review & editing, and supervision. KH, OL, and RG contributed to software, validation, data curation, writing review & editing.  GJ-M contributed to conceptualization, software, validation, resources, data curation, writing review & editing, and supervision.
 
 ## Competing Interests
 
 MCD is a consultant to F. Hoffmann-La Roche Ltd and his spouse is a full-time employee of Johnson & Johnson.
+
+Other authors report no relevant competing interests.
 
 ## Acknowledgements
 

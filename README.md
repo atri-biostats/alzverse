@@ -67,3 +67,10 @@ callr::rscript(file.path(alzverse_home, 'data-raw', 'data-prep.R'),
 # build and install package ----
 install.packages(alzverse_home, repos = NULL, type = 'source')
 ```
+
+## Funding
+
+This work is supported by the [Alzheimer’s Clinical Trials Consortium
+(ACTC)](https://www.actcinfo.org/) (NIH NIA U24AG057437).
+
+# <a href="https://www.actcinfo.org/"><img src="man/figures/actc-cropped.png" align="left" height="75" /> <a href="https://atri.usc.edu/"><img src="man/figures/atri.svg" align="right" height="75" />
