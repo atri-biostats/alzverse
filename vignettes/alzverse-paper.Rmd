@@ -1,5 +1,5 @@
 ---
-title: "Alzheimer's Clinical Research Data via R Packages: the Alzverse"
+title: "Alzheimer's Clinical Research Data via R Packages: the alzverse"
 author:
   - name: Michael C. Donohue
     affiliation: ATRI
