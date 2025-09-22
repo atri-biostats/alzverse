@@ -37,6 +37,10 @@ journal: "Arxiv"
 date: "2025-09-17"
 linenumbers: false
 numbersections: false
+vignette: >
+  %\VignetteIndexEntry{Alzheimer's Clinical Research Data via R Packages: the alzverse}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 bibliography: references.bib
 biblio-style: elsarticle-harv # author year style for natbib - use 'elsarticle-num' or 'elsarticle-num-names' for numbered scheme
 classoption: preprint, 3p, authoryear # remove authoryear is not using `elsarticle-harv`
@@ -106,7 +110,7 @@ The R package structure and workflow have been well-documented [@wickham2023r]. 
 
 **reports**. Report code that is not desired as a vignette can be stored in a separate directory for general reports. Of note, `rmarkdown` supports "parameterized reports", which can produce different output depending on the supplied parameter(s). Clinical trials like A4 often include several outcomes collected on the same schedule and analyzed with the same approach. Instead of writing identical code for several outcomes, one generic parameterized rmarkdown file can produce all these reports. Clinical trial outcomes are often aggregated into one long dataset with a row for each subject, time point, and outcome (see `ADQS` in the `A4LEARN` package). The parameterized report can filter this long dataset for the desired outcome and analyze only that outcome. Furthermore, using R parallel programming tools (e.g. @multidplyr), these reports can be produced in parallel. In the case of the A4 trial read out, once data from the blinded phase was locked and unblinded it only took about 30 minutes to build the final data package and render all planned analysis reports and summary slide decks. Prior to data lock, code and output were tested and reviewed using pseudo arm codes.
 
-## Example R Data Packages
+## The ADNIMERGE2 and A4LEARN R Data Packages
 
 The primary data sources for the packages are derived from the Alzheimer's Disease Neuroimaging Initiative (ADNI) and the A4 and LEARN companion studies [@jimenez2024maximizing]. These datasets include longitudinal clinical and neuroimaging data, cognitive test scores, genetic and biomarker data, and other modalities that have been harmonized to facilitate cross-study comparisons.
 
@@ -120,8 +124,9 @@ To ensure usability and consistency, we curated the datasets by mapping variable
 
 The R package framework facilitates the creation of ADaM datasets, which are the gold standard for statistical analysis in clinical trials. The `admiral` package [@admiral] is used to generate ADaM datasets for `ADNIMERGE2`. Other `pharmaverse` tools can be used to create regulatory-compliant tables, listings, and figures. R code to produce the example summaries below is included in the Code Availability section.
 
+ADNI data used in the preparation of this article, and the ADNIMERGE2 package were obtained from the ADNI database (\url{adni.loni.usc.edu}). The ADNI was launched in 2003 as a public-private partnership, led by Principal Investigator Michael W. Weiner, MD. The primary goal of ADNI has been to test whether serial magnetic resonance imaging (MRI), positron emission tomography (PET), other biological markers, and clinical and neuropsychological assessment can be combined to measure the progression of mild cognitive impairment (MCI) and early Alzheimer’s disease (AD).
 
-The `ADNIMERGE2` package was built using `pharmaverse` tools. It can be downloaded from [loni.usc.edu](loni.usc.edu). Below are examples of some basic summaries of participant characteristics by phase, or wave, of ADNI can be created using the `ADSL` table  (Table 1) and a spaghetti plot of ADAS-Cog scores using the `ADQS` table (Figure 1). Similarly, `A4LEARN` package data can be easily summarized using its `SUBJINFO` table (Table 2). Finally, data from all three studies can be easily summarized using the meta `ADQS` table of the `alzverse` package (Figure 2).
+The `ADNIMERGE2` package was built using `pharmaverse` tools. It can be downloaded from [adni.loni.usc.edu](adni.loni.usc.edu). Below are examples of some basic summaries of participant characteristics by phase, or wave, of ADNI can be created using the `ADSL` table  (Table 1) and a spaghetti plot of ADAS-Cog scores using the `ADQS` table (Figure 1). Similarly, `A4LEARN` package data can be easily summarized using its `SUBJINFO` table (Table 2). Finally, data from all three studies can be easily summarized using the meta `ADQS` table of the `alzverse` package (Figure 2).
 
 ```{r adni-overall-summary, echo = FALSE, out.height = "9in", out.width= "5in", message = FALSE}
 tab1 <- tbl_summary(
