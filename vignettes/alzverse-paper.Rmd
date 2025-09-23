@@ -27,7 +27,7 @@ footnote:
   - code: 1
     text: "Data used in preparation of this article were obtained from the Alzheimer's Disease Neuroimaging Initiative (ADNI) database (\\url{adni.loni.usc.edu}). As such, the investigators within the ADNI contributed to the design and implementation of ADNI and/or provided data but did not participate in the analysis or writing of this report. A complete listing of ADNI investigators can be found at: \\url{http://adni.loni.usc.edu/wp-content/uploads/how_to_apply/ADNI_Acknowledgement_List.pdf}."
 abstract: |
-  Sharing clinical research data is essential for advancing research in Alzheimer's disease (AD) and other therapeutic areas. However, challenges in data accessibility, standardization, documentation, usability, and reproducibility continue to impede this goal. In this article, we highlight the advantages of using R packages to overcome these challenges using two examples. The `A4LEARN` R package includes data from a randomized trial (the Anti-Amyloid Treatment in Asymptomatic Alzheimer’s [A4] study) and its companion observational study of biomarker negative individuals (the Longitudinal Evaluation of Amyloid Risk and Neurodegeneration [LEARN] study). The `ADNIMERGE2` R package includes data from the Alzheimer’s Disease Neuroimaging Initiative (ADNI), a longitudinal observational biomarker and imaging study. These packages collect data, documentation, and reproducible analysis vignettes into a portable bundle that can be installed and browsed within commonly used R programming environments. We also introduce the `alzverse` package which leverages a common data standard to combine study-specific data packages to facilitate meta-analyses. By promoting collaboration, transparency, and reproducibility, R data packages can play a vital role in accelerating clinical research.
+  Sharing clinical research data is essential for advancing Alzheimer’s disease (AD) research, yet challenges in accessibility, standardization, documentation, usability, and reproducibility persist. We demonstrate how R packages can address these barriers with two examples. `A4LEARN` provides access to data from the Anti-Amyloid Treatment in Asymptomatic Alzheimer’s (A4) randomized trial and its companion observational study, the Longitudinal Evaluation of Amyloid Risk and Neurodegeneration (LEARN). `ADNIMERGE2` contains curated data from the Alzheimer’s Disease Neuroimaging Initiative (ADNI), a landmark longitudinal biomarker and imaging study. These packages integrate data, documentation, and reproducible analysis vignettes into portable, analysis-ready bundles that can be installed and explored directly in R. We also introduce the `alzverse` package, which applies a common data standard to unify study-specific packages and facilitate meta-analyses. By promoting collaboration, transparency, and reproducibility, R data packages provide a scalable and impactful framework for accelerating AD clinical research..
 keywords: 
   - open data
   - clinical trial
@@ -46,10 +46,11 @@ biblio-style: elsarticle-harv # author year style for natbib - use 'elsarticle-n
 classoption: preprint, 3p, authoryear # remove authoryear is not using `elsarticle-harv`
 # Use a CSL with `citation_package = "default"`
 # csl: https://www.zotero.org/styles/elsevier-harvard
-output: 
+output:
   rticles::elsevier_article:
     keep_tex: true
     citation_package: natbib
+# output: word_document
 ---
 
 ```{r, include = FALSE}
