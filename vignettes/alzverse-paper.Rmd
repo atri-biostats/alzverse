@@ -44,11 +44,11 @@ vignette: >
 bibliography: references.bib
 biblio-style: elsarticle-harv # author year style for natbib - use 'elsarticle-num' or 'elsarticle-num-names' for numbered scheme
 classoption: preprint, 3p, authoryear # remove authoryear is not using `elsarticle-harv`
-# output:
-#   rticles::elsevier_article:
-#     keep_tex: true
-#     citation_package: natbib
-output: word_document
+output:
+  rticles::elsevier_article:
+    keep_tex: true
+    citation_package: natbib
+# output: word_document
 csl: american-medical-association-parentheses.csl
 ---
 
@@ -57,6 +57,7 @@ library(alzverse)
 library(tidyverse)
 library(gtsummary)
 library(labelled)
+library(gt)
 
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>", 
   dev = 'pdf', dpi = 300, fig.width = 6, fig.height = 6/1.6,
@@ -69,7 +70,7 @@ theme_set(theme_bw() +
 # rmarkdown::render('./alzverse-paper.Rmd', clean = FALSE)
 ```
 
-## Introduction
+## Background
 
 Alzheimer's disease (AD) is among the most important neurodegenerative diseases worldwide. The Alzheimer’s Disease Neuroimaging Initiative (ADNI) [@weiner2025overview] and similar projects have accumulated vast quantities of clinical, neuroimaging, and biomarker data, creating opportunities for scientific advances in the understanding and treatment of AD. ADNI data have supported more than 6000 scientific papers publications [@weiner2025overview].
 
@@ -128,7 +129,7 @@ The R package framework facilitates the creation of ADaM datasets, which are the
 The `ADNIMERGE2` package was built using `pharmaverse` tools. It can be downloaded from [adni.loni.usc.edu](adni.loni.usc.edu). Below are examples of some basic summaries of participant characteristics by phase, or wave, of ADNI can be created using the `ADSL` table  (Table 1) and a spaghetti plot of ADAS-Cog scores using the `ADQS` table (Figure 1). Similarly, `A4LEARN` package data can be easily summarized using its `SUBJINFO` table (Table 2). Finally, data from all three studies can be easily summarized using the meta `ADQS` table of the `alzverse` package (Figure 2).
 
 ```{r adni-overall-summary, echo = FALSE, message = FALSE}
-tbl_summary(
+tab1 <- tbl_summary(
   data = ADNIMERGE2::ADSL %>% filter(ENRLFL %in% "Y"),
   by = ORIGPROT,
   include = c(AGE, SEX, EDUC, RACE, ETHNIC, DX, APOE, ADASTT13, CDRSB, MMSCORE),
@@ -157,7 +158,11 @@ tbl_summary(
     MMSE: Mini Mental State Exam.") %>%
   modify_caption(
     caption = "Table 1. ADNI - Subject Characteristics by Study Phase") %>%
-  bold_labels()
+  bold_labels() %>%
+  as_gt()
+
+gtsave(tab1, filename = "Table-1-ADNI.png")
+knitr::include_graphics("Table-1-ADNI.png")
 ```
 
 ```{r adni-adas-indiv-profile-plot, warning = FALSE, fig.alt = "Individual profile plot", fig.cap = "Figure 1. Spaghetti plot of ADAS-cog13 scores in ADNI by baseline clinical diagnosis.", echo = FALSE}
@@ -181,7 +186,7 @@ ggplot(aes(x = Years, y = AVAL, group = USUBJID, color = DX)) +
 ```
 
 ```{r a4learn-overall-summary, echo = FALSE, message = FALSE}
-tbl_summary(
+tab2 <- tbl_summary(
   data = A4LEARN::SUBJINFO %>% filter(SUBSTUDY %in% c('A4', 'LEARN')),
   by = SUBSTUDY,
   include = c(AGEYR, SEX, EDCCNTU, RACE, ETHNIC, APOEGN, AMYLCENT),
@@ -209,7 +214,11 @@ tbl_summary(
     LEARN: Longitudinal Evaluation of Amyloid Risk and Neurodegeneration.") %>%
   modify_caption(
     caption = "Table 2. A4 and LEARN - Subject characteristics by study.") %>%
-  bold_labels()
+  bold_labels() %>%
+  as_gt()
+
+gtsave(tab2, filename = "Table-2-A4LEARN.png")
+knitr::include_graphics("Table-2-A4LEARN.png")
 ```
 
 ```{r adni-a4-learn-indiv-profile-plot, warning = FALSE, fig.alt = "Individual profile plot", fig.cap = "Figure 2. Spaghetti plot of MMSE scores in ADNI CN, A4, and LEARN.", echo = FALSE}
@@ -257,7 +266,7 @@ The A4 and LEARN Studies were supported by a public-private-philanthropic partne
 
 All human subjects provided informed consent.
 
-## Key Words
+## Keywords
 
 - open data
 - clinical trial
