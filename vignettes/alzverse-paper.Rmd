@@ -69,13 +69,13 @@ theme_set(theme_bw() +
 # rmarkdown::render('./alzverse-paper.Rmd', clean = FALSE)
 ```
 
-## Introduction
+## Background
 
 Alzheimer's disease (AD) is among the most important neurodegenerative diseases worldwide. The Alzheimer’s Disease Neuroimaging Initiative (ADNI) [@weiner2025overview] and similar projects have accumulated vast quantities of clinical, neuroimaging, and biomarker data, creating opportunities for scientific advances in the understanding and treatment of AD. ADNI data have supported more than 6000 scientific papers publications [@weiner2025overview].
 
 Availability of such data is on the rise, due in part to data sharing mandates from funders like the National Institutes of Health. However, it often takes considerable time and effort for researchers to gain sufficient familiarity with the data to produce meaningful analyses. Learning curves can be steep due to inadequate or hard-to-locate documentation and example analysis code.
 
-Open-source software solutions, particularly in the form of R packages [@R-base; @wickham2023r], offer significant potential to address these barriers. The R programming language is widely used in biostatistics, machine learning, and clinical research. R packages are a well-known means for distributing cutting edge statistical software and documentation, and they often include data and analysis vignettes which demonstrate how the methods can be applied. Importantly, R packages can also be an effective tool to share data itself. For example, the authors have maintained the `ADNIMERGE` R data package since 2013. It has been cited by about 250 articles^[Based on a Google Scholar search of "ADNIMERGE" AND "package"] and has inspired related projects, such as the `ANMERGE` package of AddNeuroMed Consortium data [@birkenbihl2021anmerge]. Similarly, Vuorre et al.@vuorre2021sharing demonstrated the utility of R packages for sharing data and analysis code from psychological experiments.
+Open-source software solutions, particularly in the form of R packages [@R-base; @wickham2023r], offer significant potential to address these barriers. The R programming language is widely used in biostatistics, machine learning, and clinical research. R packages are a well-known means for distributing cutting edge statistical software and documentation, and they often include data and analysis vignettes which demonstrate how the methods can be applied. Importantly, R packages can also be an effective tool to share data itself. For example, the authors have maintained the `ADNIMERGE` R data package since 2013. It has been cited by about 250 articles^[Based on a Google Scholar search of "ADNIMERGE" AND "package"] and has inspired related projects, such as the `ANMERGE` package of AddNeuroMed Consortium data [@birkenbihl2021anmerge]. Similarly, Vuorre and Crump [@vuorre2021sharing] demonstrated the utility of R packages for sharing data and analysis code from psychological experiments.
 
 We discuss how R packages can also facilitate easy access, harmonization, and analysis of larger clinical datasets from AD studies. These packages are built with the goal of providing an audit trail of derived data provenance, supporting reproducible research, and leveraging outstanding R tools for unit testing and validation [@testthat], websites [@pkgdown], and regulatory submissions [@pharmaverse2023]. 
 
@@ -257,7 +257,7 @@ The A4 and LEARN Studies were supported by a public-private-philanthropic partne
 
 All human subjects provided informed consent.
 
-## Key Words
+## Keywords
 
 - open data
 - clinical trial
