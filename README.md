@@ -13,8 +13,8 @@ Alzheimer’s research. Documentation can be found at
 
 Data is available from:
 
-- `A4LEARN`: [A4StudyData.org](A4StudyData.org)
-- `ADNIMERGE2`: [loni.usc.edu](loni.usc.edu)
+- `A4LEARN`: [A4StudyData.org](https://A4StudyData.org)
+- `ADNIMERGE2`: [loni.usc.edu](https://loni.usc.edu)
 
 Data documentation is available from
 
@@ -38,8 +38,8 @@ R code is available for download from the following repositories:
 
 To install `alzverse`, first download and install:
 
-- `A4LEARN`: [A4StudyData.org](A4StudyData.org), and
-- `ADNIMERGE2`: [loni.usc.edu](loni.usc.edu)
+- `A4LEARN`: [A4StudyData.org](https://A4StudyData.org), and
+- `ADNIMERGE2`: [loni.usc.edu](https://loni.usc.edu)
 
 Then run the following steps to download `alzverse` code, build package
 locally with merged data, and install `alzverse`:
