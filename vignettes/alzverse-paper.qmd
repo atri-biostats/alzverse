@@ -2,39 +2,61 @@
 title: "Alzheimer's Clinical Research Data via R Packages: the alzverse"
 author:
   - name: Michael C. Donohue
-    affiliation: ATRI
+    email: mdonohue@usc.edu
     correspondingauthor: true
+    affiliations:
+      - ref: ATRI
   - name: Kedir Hussen
-    affiliation: ATRI
+    affiliations: 
+      - ref: ATRI
   - name: Oliver Langford
-    affiliation: ATRI
+    affiliations: 
+      - ref: ATRI
   - name: Richard Gallardo
-    affiliation: ATRI
+    affiliations: 
+      - ref: ATRI
   - name: Gustavo Jimenez-Maggiora
-    affiliation: ATRI
+    affiliations: 
+      - ref: ATRI
   - name: Paul S. Aisen
-    affiliation: ATRI
+    affiliations: 
+      - ref: ATRI
   - name: "for the Alzheimer's Disease Neuroimaging Initiative"
     footnote: 1
-address:
-  - code: ATRI
-    organization: Alzheimer's Therapeutic Research Institute, University of Southern California
+affiliations:
+  - id: ATRI
+    name: Alzheimer's Therapeutic Research Institute, University of Southern California
     city: San Diego
     state: CA
-    postcode: 92121
-    country: United States
 footnote:
   - code: 1
     text: "Data used in preparation of this article were obtained from the Alzheimer's Disease Neuroimaging Initiative (ADNI) database (\\url{adni.loni.usc.edu}). As such, the investigators within the ADNI contributed to the design and implementation of ADNI and/or provided data but did not participate in the analysis or writing of this report. A complete listing of ADNI investigators can be found at: \\url{http://adni.loni.usc.edu/wp-content/uploads/how_to_apply/ADNI_Acknowledgement_List.pdf}."
 abstract: |
-  INTRODUCTION: Sharing clinical research data is essential for advancing Alzheimer’s disease (AD) research, yet challenges in accessibility, standardization, documentation, usability, and reproducibility persist. METHODS: We developed R data packages to streamline access to curated datasets from key AD studies. A4LEARN includes data from the Anti-Amyloid Treatment in Asymptomatic Alzheimer’s (A4) randomized trial and its companion observational study, the Longitudinal Evaluation of Amyloid Risk and Neurodegeneration (LEARN). ADNIMERGE2 contains curated data from the Alzheimer’s Disease Neuroimaging Initiative (ADNI), a longitudinal biomarker and imaging study. RESULTS: These packages bundle data, documentation, and reproducible analysis vignettes into portable, analysis-ready formats that can be installed and used within R. We also introduce the alzverse package, which applies a common data standard to integrate study-specific packages and facilitate meta-analyses. DISCUSSION: By promoting collaboration, transparency, and reproducibility, R data packages provide a scalable framework to accelerate AD clinical research.
+  **INTRODUCTION:** Sharing clinical research data is essential for advancing Alzheimer’s disease (AD) research, yet challenges in accessibility, standardization, documentation, usability, and reproducibility persist. 
+
+  **METHODS:** We developed R data packages to streamline access to curated datasets from key AD studies. A4LEARN includes data from the Anti-Amyloid Treatment in Asymptomatic Alzheimer’s (A4) randomized trial and its companion observational study, the Longitudinal Evaluation of Amyloid Risk and Neurodegeneration (LEARN). ADNIMERGE2 contains curated data from the Alzheimer’s Disease Neuroimaging Initiative (ADNI), a longitudinal biomarker and imaging study. 
+  
+  **RESULTS:** These packages bundle data, documentation, and reproducible analysis vignettes into portable, analysis-ready formats that can be installed and used within R. We also introduce the alzverse package, which applies a common data standard to integrate study-specific packages and facilitate meta-analyses. 
+  
+  **DISCUSSION:** By promoting collaboration, transparency, and reproducibility, R data packages provide a scalable framework to accelerate AD clinical research.
 keywords: 
   - open data
   - clinical trial
   - R
   - Alzheimer's
-journal: "Arxiv"
-date: "2025-09-17"
+format:
+  html:
+    code-fold: true
+    toc: true
+  pdf:
+    documentclass: article
+    geometry:
+      - margin=1in
+  docx: default
+editor: source
+prefer-html: true
+always_allow_html: true
+date: "2025-12-22"
 linenumbers: false
 numbersections: false
 vignette: >
@@ -42,13 +64,6 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: references.bib
-biblio-style: elsarticle-harv # author year style for natbib - use 'elsarticle-num' or 'elsarticle-num-names' for numbered scheme
-classoption: preprint, 3p, authoryear # remove authoryear is not using `elsarticle-harv`
-# output:
-#   rticles::elsevier_article:
-#     keep_tex: true
-#     citation_package: natbib
-output: word_document
 csl: american-medical-association-parentheses.csl
 ---
 
@@ -59,7 +74,7 @@ library(gtsummary)
 library(labelled)
 
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>", 
-  dev = 'pdf', dpi = 300, fig.width = 6, fig.height = 6/1.6,
+  dpi = 300, fig.width = 6, fig.height = 6/1.6,
   out.width = "100%", fig.path = './')
 
 options(width = 68, cli.unicode = FALSE, cli.width = 68)
@@ -79,7 +94,7 @@ Open-source software solutions, particularly in the form of R packages [@R; @wic
 
 We discuss how R packages can also facilitate easy access, harmonization, and analysis of larger clinical datasets from AD studies. These packages are built with the goal of providing an audit trail of derived data provenance, supporting reproducible research, and leveraging outstanding R tools for unit testing and validation [@testthat], websites [@pkgdown], and regulatory submissions [@pharmaverse2023]. 
 
-In this paper we discuss the advantages of using R packages to share large clinical study datasets, and provide two new examples: the `A4LEARN` packages which includes data from a randomized trial (the Anti-Amyloid Treatment in Asymptomatic Alzheimer’s [A4] study) [@sperling2023trial] and its companion observational study of biomarker negative individuals (the Longitudinal Evaluation of Amyloid Risk and Neurodegeneration [LEARN] study) [@sperling2024amyloid]; and the `ADNIMERGE2` package, which includes latest data from the Alzheimer’s Disease Neuroimaging Initiative (ADNI) [@weiner2025overview]. We also introduce the [`alzverse`](https://atri-biostats.github.io/alzverse/) meta data package, which demonstrates how `ADNIMERGE2`, `A4LEARN`, and other R data packages can be combined to facilitate meta-analyses.
+In this paper we discuss the advantages of using R packages to share large clinical study datasets, and provide two new examples: the `A4LEARN` packages which includes data from a randomized trial (the Anti-Amyloid Treatment in Asymptomatic Alzheimer’s [A4] study) [@sperling2023trial] and its companion observational study of biomarker negative individuals (the Longitudinal Evaluation of Amyloid Risk and Neurodegeneration [LEARN] study) [@sperling2024amyloid]; and the `ADNIMERGE2` package, which includes latest data from the Alzheimer’s Disease Neuroimaging Initiative (ADNI) [@weiner2025overview]. We also introduce the `alzverse` meta data package [@alzverse], which demonstrates how `ADNIMERGE2`, `A4LEARN`, and other R data packages can be combined to facilitate meta-analyses.
 
 ## Methods
 
@@ -127,13 +142,14 @@ To ensure usability and consistency, we curated the datasets by mapping variable
 
 The R package framework facilitates the creation of ADaM datasets, which are the gold standard for statistical analysis in clinical trials. The `admiral` package [@admiral] is used to generate ADaM datasets for `ADNIMERGE2`. Other `pharmaverse` tools can be used to create regulatory-compliant tables, listings, and figures. R code to produce the example summaries below is included in the Code Availability section.
 
-The `ADNIMERGE2` package was built using `pharmaverse` tools. It can be downloaded from the ADNI website [@adni-loni]. Below are examples of some basic summaries of participant characteristics by phase, or wave, of ADNI can be created using the `ADSL` table  (Table 1) and a spaghetti plot of ADAS-Cog scores using the `ADQS` table (Figure 1). `ADNIMERGE2` is updated quarterly, and the date that the data was sourced is available from the variable `ADNIMERGE2::DATA_DOWNLOADED_DATE`. Similarly, `A4LEARN` package data can be easily summarized using its `SUBJINFO` table (Table 2). Finally, data from all three studies can be easily summarized using the meta `ADQS` table of the `alzverse` package (Figure 2).
+The `ADNIMERGE2` package was built using `pharmaverse` tools. It can be downloaded from the ADNI website [@adniloni]. Below are examples of some basic summaries of participant characteristics by phase, or wave, of ADNI can be created using the `ADSL` table  (@tbl-adni-overall-summary) and a spaghetti plot of ADAS-Cog scores using the `ADQS` table (@fig-adni-adas-indiv-profile-plot). `ADNIMERGE2` is updated quarterly, and the date that the data was sourced is available from the variable `ADNIMERGE2::DATA_DOWNLOADED_DATE`. Similarly, `A4LEARN` package data can be easily summarized using its `SUBJINFO` table (@tbl-a4learn-overall-summary). Finally, data from all three studies can be easily summarized using the meta `ADQS` table of the `alzverse` package (@fig-adni-a4-learn-indiv-profile-plot).
 
-```{r adni-overall-summary, echo = FALSE, message = FALSE}
+```{r tbl-adni-overall-summary, echo = FALSE, message = FALSE}
 tbl_summary(
   data = ADNIMERGE2::ADSL %>% filter(ENRLFL %in% "Y"),
   by = ORIGPROT,
-  include = c(AGE, SEX, EDUC, RACE, ETHNIC, DX, APOE, ADASTT13, CDRSB, MMSCORE),
+  include = c(AGE, SEX, EDUC, RACE, ETHNIC, DX, APOE, AMYSTAT,
+    ADASTT13, CDRSB, MMSCORE),
   type = all_continuous() ~ "continuous2",
   statistic = list(
     all_continuous() ~ "{mean} ({sd})",
@@ -162,7 +178,7 @@ tbl_summary(
   bold_labels()
 ```
 
-```{r adni-adas-indiv-profile-plot, warning = FALSE, fig.alt = "Individual profile plot", fig.cap = "Figure 1. Spaghetti plot of ADAS-cog13 scores in ADNI by baseline clinical diagnosis.", echo = FALSE}
+```{r fig-adni-adas-indiv-profile-plot, warning = FALSE, fig.alt = "Individual profile plot", fig.cap = "Spaghetti plot of ADAS-cog13 scores in ADNI by baseline clinical diagnosis.", echo = FALSE}
 # Individual profile (spaghetti) plot
 ADNIMERGE2::ADQS %>%
   # Enrolled participant
@@ -182,7 +198,7 @@ ggplot(aes(x = Years, y = AVAL, group = USUBJID, color = DX)) +
   guides(colour = guide_legend(override.aes = list(alpha = 1)))
 ```
 
-```{r a4learn-overall-summary, echo = FALSE, message = FALSE}
+```{r tbl-a4learn-overall-summary, echo = FALSE, message = FALSE}
 tbl_summary(
   data = A4LEARN::SUBJINFO %>% filter(SUBSTUDY %in% c('A4', 'LEARN')),
   by = SUBSTUDY,
@@ -214,7 +230,7 @@ tbl_summary(
   bold_labels()
 ```
 
-```{r adni-a4-learn-indiv-profile-plot, warning = FALSE, fig.alt = "Individual profile plot", fig.cap = "Figure 2. Spaghetti plot of MMSE scores in ADNI CN, A4, and LEARN.", echo = FALSE}
+```{r fig-adni-a4-learn-indiv-profile-plot, warning = FALSE, fig.alt = "Individual profile plot", fig.cap = "Spaghetti plot of MMSE scores in ADNI CN, A4, and LEARN.", echo = FALSE}
 alzverse::ADQS %>%
   filter(DX == 'CN' | STUDYID %in% c('A4', 'LEARN'), 
     PARAMCD %in% c('MMSCORE', 'MMSE')) %>%
